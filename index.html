@@ -1,928 +1,349 @@
-<html>
-
+<!DOCTYPE html>
+<html lang="en">
 <head>
-<meta http-equiv=Content-Type content="text/html; charset=utf-8">
-<meta name=Generator content="Microsoft Word 15 (filtered)">
-<style>
-<!--
- /* Font Definitions */
- @font-face
-	{font-family:"Cambria Math";
-	panose-1:2 4 5 3 5 4 6 3 2 4;}
-@font-face
-	{font-family:Calibri;
-	panose-1:2 15 5 2 2 2 4 3 2 4;}
- /* Style Definitions */
- p.MsoNormal, li.MsoNormal, div.MsoNormal
-	{margin:0cm;
-	font-size:12.0pt;
-	font-family:"Calibri",sans-serif;}
-.MsoChpDefault
-	{font-family:"Calibri",sans-serif;}
-@page WordSection1
-	{size:595.3pt 841.9pt;
-	margin:72.0pt 72.0pt 72.0pt 72.0pt;}
-div.WordSection1
-	{page:WordSection1;}
--->
-</style>
-
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gemini Customer Care Chat</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap');
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f3f4f6;
+            color: #1f2937;
+        }
+        .modal-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            justify-content: center;
+            align-items: center;
+            z-index: 50;
+        }
+        .modal-content {
+            background-color: white;
+            padding: 2rem;
+            border-radius: 1rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            max-width: 90%;
+            width: 500px;
+        }
+    </style>
 </head>
-
-<body lang=EN-IN style='word-wrap:break-word'>
-
-<div class=WordSection1>
-
-<p class=MsoNormal>&lt;!DOCTYPE html&gt;</p>
-
-<p class=MsoNormal>&lt;html lang=&quot;en&quot;&gt;</p>
-
-<p class=MsoNormal>&lt;head&gt;</p>
-
-<p class=MsoNormal>    &lt;meta charset=&quot;UTF-8&quot;&gt;</p>
-
-<p class=MsoNormal>    &lt;meta name=&quot;viewport&quot;
-content=&quot;width=device-width, initial-scale=1.0&quot;&gt;</p>
-
-<p class=MsoNormal>    &lt;title&gt;Gemini Customer Care Chat&lt;/title&gt;</p>
-
-<p class=MsoNormal>    &lt;script
-src=&quot;https://cdn.tailwindcss.com&quot;&gt;&lt;/script&gt;</p>
-
-<p class=MsoNormal>    &lt;style&gt;</p>
-
-<p class=MsoNormal>        @import
-url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;display=swap');</p>
-
-<p class=MsoNormal>        body {</p>
-
-<p class=MsoNormal>            font-family: 'Inter', sans-serif;</p>
-
-<p class=MsoNormal>            background-color: #f3f4f6;</p>
-
-<p class=MsoNormal>            color: #1f2937;</p>
-
-<p class=MsoNormal>        }</p>
-
-<p class=MsoNormal>        .modal-overlay {</p>
-
-<p class=MsoNormal>            display: none;</p>
-
-<p class=MsoNormal>            position: fixed;</p>
-
-<p class=MsoNormal>            top: 0;</p>
-
-<p class=MsoNormal>            left: 0;</p>
-
-<p class=MsoNormal>            width: 100%;</p>
-
-<p class=MsoNormal>            height: 100%;</p>
-
-<p class=MsoNormal>            background-color: rgba(0, 0, 0, 0.5);</p>
-
-<p class=MsoNormal>            justify-content: center;</p>
-
-<p class=MsoNormal>            align-items: center;</p>
-
-<p class=MsoNormal>            z-index: 50;</p>
-
-<p class=MsoNormal>        }</p>
-
-<p class=MsoNormal>        .modal-content {</p>
-
-<p class=MsoNormal>            background-color: white;</p>
-
-<p class=MsoNormal>            padding: 2rem;</p>
-
-<p class=MsoNormal>            border-radius: 1rem;</p>
-
-<p class=MsoNormal>            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);</p>
-
-<p class=MsoNormal>            max-width: 90%;</p>
-
-<p class=MsoNormal>            width: 500px;</p>
-
-<p class=MsoNormal>        }</p>
-
-<p class=MsoNormal>    &lt;/style&gt;</p>
-
-<p class=MsoNormal>&lt;/head&gt;</p>
-
-<p class=MsoNormal>&lt;body class=&quot;flex items-center justify-center
-min-h-screen p-4&quot;&gt;</p>
-
-<p class=MsoNormal>&nbsp;</p>
-
-<p class=MsoNormal>    &lt;div class=&quot;relative w-full max-w-2xl bg-white
-shadow-xl rounded-2xl flex flex-col h-[80vh] overflow-hidden&quot;&gt;</p>
-
-<p class=MsoNormal>        </p>
-
-<p class=MsoNormal>        &lt;div class=&quot;p-4 border-b border-gray-200
-bg-white sticky top-0 z-10 rounded-t-2xl&quot;&gt;</p>
-
-<p class=MsoNormal>            &lt;div class=&quot;flex items-center
-justify-between&quot;&gt;</p>
-
-<p class=MsoNormal>                &lt;div id=&quot;chat-header-info&quot;
-class=&quot;flex items-center space-x-3&quot;&gt;</p>
-
-<p class=MsoNormal>                    &lt;div class=&quot;w-10 h-10
-bg-blue-500 rounded-full flex items-center justify-center text-white
-font-bold&quot;&gt;AI&lt;/div&gt;</p>
-
-<p class=MsoNormal>                    &lt;div&gt;</p>
-
-<p class=MsoNormal>                        &lt;h1 id=&quot;chat-title&quot;
-class=&quot;text-xl font-semibold&quot;&gt;Gemini Customer Support&lt;/h1&gt;</p>
-
-<p class=MsoNormal>                        &lt;p id=&quot;chat-subtitle&quot;
-class=&quot;text-sm text-gray-500&quot;&gt;How can I assist you
-today?&lt;/p&gt;</p>
-
-<p class=MsoNormal>                    &lt;/div&gt;</p>
-
-<p class=MsoNormal>                &lt;/div&gt;</p>
-
-<p class=MsoNormal>                &lt;div class=&quot;flex space-x-2&quot;&gt;</p>
-
-<p class=MsoNormal>                    &lt;button id=&quot;faq-button&quot;
-class=&quot;bg-gray-100 text-gray-700 px-4 py-2 rounded-full text-sm
-font-medium hover:bg-gray-200 transition-colors duration-200&quot;&gt;</p>
-
-<p class=MsoNormal>                        FAQs</p>
-
-<p class=MsoNormal>                    &lt;/button&gt;</p>
-
-<p class=MsoNormal>                    &lt;button
-id=&quot;dashboard-button&quot; class=&quot;bg-gray-100 text-gray-700 px-4 py-2
-rounded-full text-sm font-medium hover:bg-gray-200 transition-colors
-duration-200&quot;&gt;</p>
-
-<p class=MsoNormal>                        Dashboard</p>
-
-<p class=MsoNormal>                    &lt;/button&gt;</p>
-
-<p class=MsoNormal>                    &lt;button id=&quot;agent-button&quot;
-class=&quot;bg-blue-500 text-white px-4 py-2 rounded-full text-sm font-medium
-hover:bg-blue-600 transition-colors duration-200&quot;&gt;</p>
-
-<p class=MsoNormal>                        Talk to an Agent</p>
-
-<p class=MsoNormal>                    &lt;/button&gt;</p>
-
-<p class=MsoNormal>                &lt;/div&gt;</p>
-
-<p class=MsoNormal>            &lt;/div&gt;</p>
-
-<p class=MsoNormal>        &lt;/div&gt;</p>
-
-<p class=MsoNormal>&nbsp;</p>
-
-<p class=MsoNormal>        &lt;div id=&quot;chat-container&quot;
-class=&quot;flex-1 p-6 overflow-y-auto space-y-4&quot;&gt;</p>
-
-<p class=MsoNormal>            &lt;div class=&quot;flex items-start
-space-x-3&quot;&gt;</p>
-
-<p class=MsoNormal>                &lt;div class=&quot;w-8 h-8 rounded-full
-bg-blue-100 flex items-center justify-center text-blue-600
-flex-shrink-0&quot;&gt;</p>
-
-<p class=MsoNormal>                    &lt;svg
-xmlns=&quot;http://www.w3.org/2000/svg&quot; fill=&quot;none&quot;
-viewBox=&quot;0 0 24 24&quot; stroke-width=&quot;2&quot;
-stroke=&quot;currentColor&quot; class=&quot;w-5 h-5&quot;&gt;</p>
-
-<p class=MsoNormal>                        &lt;path
-stroke-linecap=&quot;round&quot; stroke-linejoin=&quot;round&quot;
-d=&quot;M9.813 15.939c-.198-.44-.316-.91-.35-1.4a5.992 5.992 0
-011.009-4.22c.38-.636.817-1.22 1.32-1.745-.045.025-.09.05-.135.074C10.603 9.484
-9.172 11.235 9 13.064c-.201 2.87 2.115 5.21 4.966 4.943a1.99 1.99 0
-001.385-1.579c.07-.464.113-.938.12-1.411.011-.676-.11-1.345-.333-1.986l-.004-.012c-.223-.64-.537-1.218-.887-1.724a.8.8
-0 01.442-1.399c1.47-.393 2.822.427 3.33 1.834.457 1.256.457 2.585 0 3.841-1.47
-4.026-6.494 4.026-7.964 0zm0 0c.34-.336.711-.643
-1.11-.913.045-.03.09-.059.135-.089a.8.8 0 01.442 1.399c-.854.774-1.921
-1.2-2.997
-1.215-2.87.201-5.21-2.115-4.943-4.966.07-.638.113-1.27.12-1.907.011-1.349-.11-2.678-.333-3.987l-.004-.012c-.223-1.317-.537-2.587-.887-3.722a.8.8
-0 01.442-1.399c1.47-.393 2.822.427 3.33 1.834.457 1.256.457 2.585 0 3.841-1.47
-4.026-6.494 4.026-7.964 0z&quot; /&gt;</p>
-
-<p class=MsoNormal>                        &lt;/svg&gt;</p>
-
-<p class=MsoNormal>                    &lt;/div&gt;</p>
-
-<p class=MsoNormal>                &lt;/div&gt;</p>
-
-<p class=MsoNormal>                &lt;div class=&quot;bg-gray-100 p-3
-rounded-xl max-w-md&quot;&gt;</p>
-
-<p class=MsoNormal>                    &lt;p class=&quot;text-sm&quot;&gt;Hi
-there! I'm your AI customer support assistant. How can I help you today? You
-can ask about **shipping**, **returns**, or **order status**.&lt;/p&gt;</p>
-
-<p class=MsoNormal>                &lt;/div&gt;</p>
-
-<p class=MsoNormal>            &lt;/div&gt;</p>
-
-<p class=MsoNormal>            </p>
-
-<p class=MsoNormal>        &lt;/div&gt;</p>
-
-<p class=MsoNormal>&nbsp;</p>
-
-<p class=MsoNormal>        &lt;div class=&quot;p-4 border-t border-gray-200
-bg-white sticky bottom-0 z-10 rounded-b-2xl&quot;&gt;</p>
-
-<p class=MsoNormal>            &lt;div class=&quot;relative&quot;&gt;</p>
-
-<p class=MsoNormal>                &lt;input id=&quot;message-input&quot;
-type=&quot;text&quot; placeholder=&quot;Type your message...&quot;
-class=&quot;w-full pl-4 pr-12 py-3 rounded-full bg-gray-100 focus:outline-none
-focus:ring-2 focus:ring-blue-500 transition-shadow duration-300
-placeholder:text-gray-500&quot;&gt;</p>
-
-<p class=MsoNormal>                &lt;button id=&quot;send-button&quot;
-class=&quot;absolute inset-y-0 right-0 flex items-center justify-center pr-3
-group&quot;&gt;</p>
-
-<p class=MsoNormal>                    &lt;div class=&quot;p-2 bg-blue-500
-rounded-full transition-all duration-200 group-hover:scale-110&quot;&gt;</p>
-
-<p class=MsoNormal>                        &lt;svg
-xmlns=&quot;http://www.w3.org/2000/svg&quot; fill=&quot;none&quot;
-viewBox=&quot;0 0 24 24&quot; stroke-width=&quot;2&quot;
-stroke=&quot;currentColor&quot; class=&quot;w-6 h-6 text-white transform
-rotate-90&quot;&gt;</p>
-
-<p class=MsoNormal>                            &lt;path
-stroke-linecap=&quot;round&quot; stroke-linejoin=&quot;round&quot; d=&quot;M6
-12L3 21m18-9l-3 9m-9-9h9M3 3l18 18&quot; /&gt;</p>
-
-<p class=MsoNormal>                        &lt;/svg&gt;</p>
-
-<p class=MsoNormal>                    &lt;/div&gt;</p>
-
-<p class=MsoNormal>                &lt;/button&gt;</p>
-
-<p class=MsoNormal>            &lt;/div&gt;</p>
-
-<p class=MsoNormal>        &lt;/div&gt;</p>
-
-<p class=MsoNormal>&nbsp;</p>
-
-<p class=MsoNormal>        &lt;div id=&quot;loading-indicator&quot;
-class=&quot;absolute inset-x-0 bottom-40 w-12 h-12 rounded-full mx-auto
-hidden&quot;&gt;</p>
-
-<p class=MsoNormal>            &lt;div class=&quot;h-full w-full rounded-full
-bg-blue-500 animate-pulse&quot;&gt;&lt;/div&gt;</p>
-
-<p class=MsoNormal>        &lt;/div&gt;</p>
-
-<p class=MsoNormal>&nbsp;</p>
-
-<p class=MsoNormal>    &lt;/div&gt;</p>
-
-<p class=MsoNormal>&nbsp;</p>
-
-<p class=MsoNormal>    &lt;div id=&quot;dashboard-modal&quot;
-class=&quot;modal-overlay&quot;&gt;</p>
-
-<p class=MsoNormal>        &lt;div class=&quot;modal-content&quot;&gt;</p>
-
-<p class=MsoNormal>            &lt;div class=&quot;flex justify-between
-items-center mb-4&quot;&gt;</p>
-
-<p class=MsoNormal>                &lt;h2 class=&quot;text-2xl
-font-bold&quot;&gt;Support Dashboard&lt;/h2&gt;</p>
-
-<p class=MsoNormal>                &lt;button id=&quot;close-modal-button&quot;
-class=&quot;text-gray-500 hover:text-gray-700 transition-colors
-duration-200&quot;&gt;</p>
-
-<p class=MsoNormal>                    &lt;svg
-xmlns=&quot;http://www.w3.org/2000/svg&quot; fill=&quot;none&quot;
-viewBox=&quot;0 0 24 24&quot; stroke-width=&quot;2&quot;
-stroke=&quot;currentColor&quot; class=&quot;w-6 h-6&quot;&gt;</p>
-
-<p class=MsoNormal>                        &lt;path
-stroke-linecap=&quot;round&quot; stroke-linejoin=&quot;round&quot; d=&quot;M6
-18L18 6M6 6l12 12&quot; /&gt;</p>
-
-<p class=MsoNormal>                    &lt;/svg&gt;</p>
-
-<p class=MsoNormal>                &lt;/button&gt;</p>
-
-<p class=MsoNormal>            &lt;/div&gt;</p>
-
-<p class=MsoNormal>            &lt;div class=&quot;space-y-4&quot;&gt;</p>
-
-<p class=MsoNormal>                &lt;div class=&quot;bg-gray-100 p-4
-rounded-xl flex justify-between items-center&quot;&gt;</p>
-
-<p class=MsoNormal>                    &lt;span class=&quot;text-sm font-medium
-text-gray-600&quot;&gt;Resolution Rate&lt;/span&gt;</p>
-
-<p class=MsoNormal>                    &lt;span class=&quot;text-2xl font-bold
-text-blue-600&quot;&gt;78%&lt;/span&gt;</p>
-
-<p class=MsoNormal>                &lt;/div&gt;</p>
-
-<p class=MsoNormal>                &lt;div class=&quot;bg-gray-100 p-4
-rounded-xl flex justify-between items-center&quot;&gt;</p>
-
-<p class=MsoNormal>                    &lt;span class=&quot;text-sm font-medium
-text-gray-600&quot;&gt;Escalation Rate&lt;/span&gt;</p>
-
-<p class=MsoNormal>                    &lt;span class=&quot;text-2xl font-bold
-text-red-600&quot;&gt;12%&lt;/span&gt;</p>
-
-<p class=MsoNormal>                &lt;/div&gt;</p>
-
-<p class=MsoNormal>                &lt;div class=&quot;bg-gray-100 p-4
-rounded-xl flex justify-between items-center&quot;&gt;</p>
-
-<p class=MsoNormal>                    &lt;span class=&quot;text-sm font-medium
-text-gray-600&quot;&gt;Average Response Time&lt;/span&gt;</p>
-
-<p class=MsoNormal>                    &lt;span class=&quot;text-2xl font-bold
-text-green-600&quot;&gt;45s&lt;/span&gt;</p>
-
-<p class=MsoNormal>                &lt;/div&gt;</p>
-
-<p class=MsoNormal>            &lt;/div&gt;</p>
-
-<p class=MsoNormal>        &lt;/div&gt;</p>
-
-<p class=MsoNormal>    &lt;/div&gt;</p>
-
-<p class=MsoNormal>    </p>
-
-<p class=MsoNormal>    &lt;div id=&quot;faq-modal&quot;
-class=&quot;modal-overlay&quot;&gt;</p>
-
-<p class=MsoNormal>        &lt;div class=&quot;modal-content&quot;&gt;</p>
-
-<p class=MsoNormal>            &lt;div class=&quot;flex justify-between
-items-center mb-4&quot;&gt;</p>
-
-<p class=MsoNormal>                &lt;h2 class=&quot;text-2xl
-font-bold&quot;&gt;Frequently Asked Questions&lt;/h2&gt;</p>
-
-<p class=MsoNormal>                &lt;button
-id=&quot;close-faq-modal-button&quot; class=&quot;text-gray-500
-hover:text-gray-700 transition-colors duration-200&quot;&gt;</p>
-
-<p class=MsoNormal>                    &lt;svg
-xmlns=&quot;http://www.w3.org/2000/svg&quot; fill=&quot;none&quot;
-viewBox=&quot;0 0 24 24&quot; stroke-width=&quot;2&quot;
-stroke=&quot;currentColor&quot; class=&quot;w-6 h-6&quot;&gt;</p>
-
-<p class=MsoNormal>                        &lt;path
-stroke-linecap=&quot;round&quot; stroke-linejoin=&quot;round&quot; d=&quot;M6
-18L18 6M6 6l12 12&quot; /&gt;</p>
-
-<p class=MsoNormal>                    &lt;/svg&gt;</p>
-
-<p class=MsoNormal>                &lt;/button&gt;</p>
-
-<p class=MsoNormal>            &lt;/div&gt;</p>
-
-<p class=MsoNormal>            &lt;div class=&quot;space-y-4&quot;&gt;</p>
-
-<p class=MsoNormal>                &lt;div&gt;</p>
-
-<p class=MsoNormal>                    &lt;h3 class=&quot;font-bold text-lg
-mb-1&quot;&gt;1. Where is my order?&lt;/h3&gt;</p>
-
-<p class=MsoNormal>                    &lt;p class=&quot;text-sm
-text-gray-700&quot;&gt;All orders can be tracked using the tracking number
-provided in your shipping confirmation email.&lt;/p&gt;</p>
-
-<p class=MsoNormal>                &lt;/div&gt;</p>
-
-<p class=MsoNormal>                &lt;hr&gt;</p>
-
-<p class=MsoNormal>                &lt;div&gt;</p>
-
-<p class=MsoNormal>                    &lt;h3 class=&quot;font-bold text-lg
-mb-1&quot;&gt;2. How do I initiate a return?&lt;/h3&gt;</p>
-
-<p class=MsoNormal>                    &lt;p class=&quot;text-sm
-text-gray-700&quot;&gt;To start a return, please visit our Returns Center on
-our website. You will need your order number and email address.&lt;/p&gt;</p>
-
-<p class=MsoNormal>                &lt;/div&gt;</p>
-
-<p class=MsoNormal>                &lt;hr&gt;</p>
-
-<p class=MsoNormal>                &lt;div&gt;</p>
-
-<p class=MsoNormal>                    &lt;h3 class=&quot;font-bold text-lg
-mb-1&quot;&gt;3. What is your return policy?&lt;/h3&gt;</p>
-
-<p class=MsoNormal>                    &lt;p class=&quot;text-sm
-text-gray-700&quot;&gt;You can return most items within 30 days of delivery.
-The items must be in new and unused condition with original tags and
-packaging.&lt;/p&gt;</p>
-
-<p class=MsoNormal>                &lt;/div&gt;</p>
-
-<p class=MsoNormal>                &lt;hr&gt;</p>
-
-<p class=MsoNormal>                &lt;div&gt;</p>
-
-<p class=MsoNormal>                    &lt;h3 class=&quot;font-bold text-lg
-mb-1&quot;&gt;4. When will I receive my refund?&lt;/h3&gt;</p>
-
-<p class=MsoNormal>                    &lt;p class=&quot;text-sm
-text-gray-700&quot;&gt;Once your return is received and inspected, we will send
-you an email notification. Refunds are typically processed within 5-7 business
-days.&lt;/p&gt;</p>
-
-<p class=MsoNormal>                &lt;/div&gt;</p>
-
-<p class=MsoNormal>            &lt;/div&gt;</p>
-
-<p class=MsoNormal>        &lt;/div&gt;</p>
-
-<p class=MsoNormal>    &lt;/div&gt;</p>
-
-<p class=MsoNormal>&nbsp;</p>
-
-<p class=MsoNormal>&nbsp;</p>
-
-<p class=MsoNormal>    &lt;script&gt;</p>
-
-<p class=MsoNormal>        document.addEventListener('DOMContentLoaded', ()
-=&gt; {</p>
-
-<p class=MsoNormal>            const chatContainer =
-document.getElementById('chat-container');</p>
-
-<p class=MsoNormal>            const messageInput =
-document.getElementById('message-input');</p>
-
-<p class=MsoNormal>            const sendButton =
-document.getElementById('send-button');</p>
-
-<p class=MsoNormal>            const loadingIndicator =
-document.getElementById('loading-indicator');</p>
-
-<p class=MsoNormal>            const agentButton =
-document.getElementById('agent-button');</p>
-
-<p class=MsoNormal>            const chatTitle =
-document.getElementById('chat-title');</p>
-
-<p class=MsoNormal>            const chatSubtitle =
-document.getElementById('chat-subtitle');</p>
-
-<p class=MsoNormal>            const dashboardButton =
-document.getElementById('dashboard-button');</p>
-
-<p class=MsoNormal>            const dashboardModal =
-document.getElementById('dashboard-modal');</p>
-
-<p class=MsoNormal>            const closeModalButton =
-document.getElementById('close-modal-button');</p>
-
-<p class=MsoNormal>            const faqButton =
-document.getElementById('faq-button');</p>
-
-<p class=MsoNormal>            const faqModal =
-document.getElementById('faq-modal');</p>
-
-<p class=MsoNormal>            const closeFaqModalButton =
-document.getElementById('close-faq-modal-button');</p>
-
-<p class=MsoNormal>&nbsp;</p>
-
-<p class=MsoNormal>            let isAgentChat = false;</p>
-
-<p class=MsoNormal>            </p>
-
-<p class=MsoNormal>            // Dummy data for previous orders</p>
-
-<p class=MsoNormal>            const dummyOrders = [</p>
-
-<p class=MsoNormal>                { id: '12345', product: 'Wireless Mouse',
-status: 'Delivered', returnEligibility: true, date: '2025-08-20' },</p>
-
-<p class=MsoNormal>                { id: '67890', product: 'Ergonomic
-Keyboard', status: 'Delivered', returnEligibility: false, date: '2025-06-15' },</p>
-
-<p class=MsoNormal>                { id: '11223', product: 'Laptop Stand',
-status: 'Shipped', returnEligibility: true, date: '2025-09-01' }</p>
-
-<p class=MsoNormal>            ];</p>
-
-<p class=MsoNormal>&nbsp;</p>
-
-<p class=MsoNormal>            // Function to add a message to the chat
-container</p>
-
-<p class=MsoNormal>            function addMessage(message, type) {</p>
-
-<p class=MsoNormal>                const messageWrapper =
-document.createElement('div');</p>
-
-<p class=MsoNormal>                messageWrapper.className = `flex items-start
-space-x-3 transition-opacity duration-300 ease-in-out opacity-0 ${type ===
-'user' ? 'justify-end' : 'justify-start'}`;</p>
-
-<p class=MsoNormal>&nbsp;</p>
-
-<p class=MsoNormal>                let contentHtml = '';</p>
-
-<p class=MsoNormal>                const senderIcon = type === 'user'</p>
-
-<p class=MsoNormal>                    ? ''</p>
-
-<p class=MsoNormal>                    : `&lt;div class=&quot;w-8 h-8
-rounded-full bg-blue-100 flex items-center justify-center text-blue-600
-flex-shrink-0&quot;&gt;</p>
-
-<p class=MsoNormal>                        &lt;svg
-xmlns=&quot;http://www.w3.org/2000/svg&quot; fill=&quot;none&quot;
-viewBox=&quot;0 0 24 24&quot; stroke-width=&quot;2&quot;
-stroke=&quot;currentColor&quot; class=&quot;w-5 h-5&quot;&gt;</p>
-
-<p class=MsoNormal>                            &lt;path
-stroke-linecap=&quot;round&quot; stroke-linejoin=&quot;round&quot;
-d=&quot;M9.813 15.939c-.198-.44-.316-.91-.35-1.4a5.992 5.992 0
-011.009-4.22c.38-.636.817-1.22 1.32-1.745-.045.025-.09.05-.135.074C10.603 9.484
-9.172 11.235 9 13.064c-.201 2.87 2.115 5.21 4.966 4.943a1.99 1.99 0
-001.385-1.579c.07-.464.113-.938.12-1.411.011-.676-.11-1.345-.333-1.986l-.004-.012c-.223-.64-.537-1.218-.887-1.724a.8.8
-0 01.442-1.399c1.47-.393 2.822.427 3.33 1.834.457 1.256.457 2.585 0 3.841-1.47
-4.026-6.494 4.026-7.964 0zm0 0c.34-.336.711-.643
-1.11-.913.045-.03.09-.059.135-.089a.8.8 0 01.442 1.399c-.854.774-1.921
-1.2-2.997
-1.215-2.87.201-5.21-2.115-4.943-4.966.07-.638.113-1.27.12-1.907.011-1.349-.11-2.678-.333-3.987l-.004-.012c-.223-1.317-.537-2.587-.887-3.722a.8.8
-0 01.442-1.399c1.47-.393 2.822.427 3.33 1.834.457 1.256.457 2.585 0 3.841-1.47
-4.026-6.494 4.026-7.964 0z&quot; /&gt;</p>
-
-<p class=MsoNormal>                        &lt;/svg&gt;</p>
-
-<p class=MsoNormal>                    &lt;/div&gt;`;</p>
-
-<p class=MsoNormal>&nbsp;</p>
-
-<p class=MsoNormal>                if (type === 'user') {</p>
-
-<p class=MsoNormal>                    contentHtml = `</p>
-
-<p class=MsoNormal>                        &lt;div class=&quot;bg-blue-500
-text-white p-3 rounded-xl max-w-md shadow-md&quot;&gt;</p>
-
-<p class=MsoNormal>                            &lt;p
-class=&quot;text-sm&quot;&gt;${message}&lt;/p&gt;</p>
-
-<p class=MsoNormal>                        &lt;/div&gt;</p>
-
-<p class=MsoNormal>                    `;</p>
-
-<p class=MsoNormal>                } else {</p>
-
-<p class=MsoNormal>                    // Check if message is a simple string
-or HTML content</p>
-
-<p class=MsoNormal>                    const isHTML =
-message.trim().startsWith('&lt;div') || message.trim().startsWith('&lt;p') ||
-message.trim().startsWith('&lt;ul');</p>
-
-<p class=MsoNormal>                    </p>
-
-<p class=MsoNormal>                    if (isHTML) {</p>
-
-<p class=MsoNormal>                        contentHtml = `${senderIcon}&lt;div
-class=&quot;bg-gray-100 p-3 rounded-xl max-w-md
-shadow-md&quot;&gt;${message}&lt;/div&gt;`;</p>
-
-<p class=MsoNormal>                    } else {</p>
-
-<p class=MsoNormal>                        contentHtml = `${senderIcon}&lt;div
-class=&quot;bg-gray-100 p-3 rounded-xl max-w-md shadow-md&quot;&gt;&lt;p
-class=&quot;text-sm&quot;&gt;${message}&lt;/p&gt;&lt;/div&gt;`;</p>
-
-<p class=MsoNormal>                    }</p>
-
-<p class=MsoNormal>                }</p>
-
-<p class=MsoNormal>&nbsp;</p>
-
-<p class=MsoNormal>                messageWrapper.innerHTML = contentHtml;</p>
-
-<p class=MsoNormal>                chatContainer.appendChild(messageWrapper);</p>
-
-<p class=MsoNormal>                </p>
-
-<p class=MsoNormal>                // Animate fade-in</p>
-
-<p class=MsoNormal>                setTimeout(() =&gt; {</p>
-
-<p class=MsoNormal>                    messageWrapper.style.opacity = '1';</p>
-
-<p class=MsoNormal>                }, 10);</p>
-
-<p class=MsoNormal>&nbsp;</p>
-
-<p class=MsoNormal>                chatContainer.scrollTop =
-chatContainer.scrollHeight;</p>
-
-<p class=MsoNormal>            }</p>
-
-<p class=MsoNormal>&nbsp;</p>
-
-<p class=MsoNormal>            // Simulates the backend call to the Vercel
-serverless function</p>
-
-<p class=MsoNormal>            async function getGeminiResponse(message) {</p>
-
-<p class=MsoNormal>                // For this prototype, we'll just mock a
-response.</p>
-
-<p class=MsoNormal>                await new Promise(resolve =&gt;
-setTimeout(resolve, 1500)); // Simulate network delay</p>
-
-<p class=MsoNormal>                </p>
-
-<p class=MsoNormal>                const lowerCaseMessage =
-message.toLowerCase();</p>
-
-<p class=MsoNormal>&nbsp;</p>
-
-<p class=MsoNormal>                // Check for previous orders, including
-typos</p>
-
-<p class=MsoNormal>                if (lowerCaseMessage.includes(&quot;previous
-orders&quot;) || lowerCaseMessage.includes(&quot;my orders&quot;) ||
-lowerCaseMessage.includes(&quot;my last orders&quot;) ||
-lowerCaseMessage.includes(&quot;orderts&quot;) || lowerCaseMessage.includes(&quot;orders&quot;)
-|| lowerCaseMessage.includes(&quot;orderss&quot;)) {</p>
-
-<p class=MsoNormal>                    const ordersHTML = dummyOrders.map(order
-=&gt; </p>
-
-<p class=MsoNormal>                        `&lt;div class=&quot;bg-white p-4
-my-2 rounded-xl shadow&quot;&gt;</p>
-
-<p class=MsoNormal>                            &lt;p class=&quot;font-semibold
-text-gray-800&quot;&gt;Order ID: &lt;span
-class=&quot;text-blue-600&quot;&gt;#${order.id}&lt;/span&gt;&lt;/p&gt;</p>
-
-<p class=MsoNormal>                            &lt;p class=&quot;text-sm
-text-gray-600&quot;&gt;Product: ${order.product}&lt;/p&gt;</p>
-
-<p class=MsoNormal>                            &lt;p class=&quot;text-sm
-text-gray-600&quot;&gt;Status: ${order.status}&lt;/p&gt;</p>
-
-<p class=MsoNormal>                            &lt;p class=&quot;text-sm
-text-gray-600&quot;&gt;Return Eligible: ${order.returnEligibility ? 'Yes' :
-'No'}&lt;/p&gt;</p>
-
-<p class=MsoNormal>                        &lt;/div&gt;`</p>
-
-<p class=MsoNormal>                    ).join('');</p>
-
-<p class=MsoNormal>                    return `&lt;div
-class=&quot;w-full&quot;&gt;${ordersHTML}&lt;/div&gt;`;</p>
-
-<p class=MsoNormal>                }</p>
-
-<p class=MsoNormal>                </p>
-
-<p class=MsoNormal>                // Check for return-related keywords</p>
-
-<p class=MsoNormal>                else if
-(lowerCaseMessage.includes(&quot;return&quot;) ||
-lowerCaseMessage.includes(&quot;refund&quot;)) {</p>
-
-<p class=MsoNormal>                    const orderIdMatch =
-message.match(/(\d{5})/);</p>
-
-<p class=MsoNormal>                    if (orderIdMatch) {</p>
-
-<p class=MsoNormal>                        const orderId = orderIdMatch[0];</p>
-
-<p class=MsoNormal>                        const order = dummyOrders.find(o
-=&gt; o.id === orderId);</p>
-
-<p class=MsoNormal>                        if (order) {</p>
-
-<p class=MsoNormal>                            if (order.returnEligibility) {</p>
-
-<p class=MsoNormal>                                return `I've checked order
-#${orderId}. It is eligible for return. You can start the process on our
-website.`;</p>
-
-<p class=MsoNormal>                            } else {</p>
-
-<p class=MsoNormal>                                return `I'm sorry, order
-#${orderId} is no longer eligible for a return as it was delivered on
-${order.date}.`;</p>
-
-<p class=MsoNormal>                            }</p>
-
-<p class=MsoNormal>                        } else {</p>
-
-<p class=MsoNormal>                            return `I couldn't find an order
-with the ID #${orderId}. Please check the number and try again.`;</p>
-
-<p class=MsoNormal>                        }</p>
-
-<p class=MsoNormal>                    } else {</p>
-
-<p class=MsoNormal>                        return &quot;You can return most
-items within 30 days of delivery. Do you have an order number I can check for
-you?&quot;;</p>
-
-<p class=MsoNormal>                    }</p>
-
-<p class=MsoNormal>                }</p>
-
-<p class=MsoNormal>                // Check for order status</p>
-
-<p class=MsoNormal>                else if
-(lowerCaseMessage.includes(&quot;order&quot;) &amp;&amp;
-lowerCaseMessage.includes(&quot;status&quot;)) {</p>
-
-<p class=MsoNormal>                    return &quot;I've checked your order.
-It's currently out for delivery and expected to arrive by the end of the
-day.&quot;;</p>
-
-<p class=MsoNormal>                } </p>
-
-<p class=MsoNormal>                // Check for FAQ-related keywords</p>
-
-<p class=MsoNormal>                else if
-(lowerCaseMessage.includes(&quot;faq&quot;) ||
-lowerCaseMessage.includes(&quot;question&quot;)) {</p>
-
-<p class=MsoNormal>                    return &quot;You can find answers to our
-most frequently asked questions by clicking the **FAQs** button in the top
-right corner.&quot;;</p>
-
-<p class=MsoNormal>                }</p>
-
-<p class=MsoNormal>                // Handle generic greetings</p>
-
-<p class=MsoNormal>                else if
-(lowerCaseMessage.includes(&quot;hello&quot;) ||
-lowerCaseMessage.includes(&quot;hi&quot;)) {</p>
-
-<p class=MsoNormal>                    return &quot;Hello! How can I help you
-today?&quot;;</p>
-
-<p class=MsoNormal>                } else {</p>
-
-<p class=MsoNormal>                    return &quot;I'm sorry, I don't have
-information about that. Please ask about shipping or returns, or connect with a
-live agent for further assistance.&quot;;</p>
-
-<p class=MsoNormal>                }</p>
-
-<p class=MsoNormal>            }</p>
-
-<p class=MsoNormal>&nbsp;</p>
-
-<p class=MsoNormal>            async function sendMessage() {</p>
-
-<p class=MsoNormal>                const message = messageInput.value.trim();</p>
-
-<p class=MsoNormal>                if (message === '' || isAgentChat) return;</p>
-
-<p class=MsoNormal>&nbsp;</p>
-
-<p class=MsoNormal>                addMessage(message, 'user');</p>
-
-<p class=MsoNormal>                messageInput.value = '';</p>
-
-<p class=MsoNormal>                loadingIndicator.classList.remove('hidden');</p>
-
-<p class=MsoNormal>&nbsp;</p>
-
-<p class=MsoNormal>                const botResponse = await
-getGeminiResponse(message);</p>
-
-<p class=MsoNormal>                </p>
-
-<p class=MsoNormal>                loadingIndicator.classList.add('hidden');</p>
-
-<p class=MsoNormal>                addMessage(botResponse, 'bot');</p>
-
-<p class=MsoNormal>            }</p>
-
-<p class=MsoNormal>&nbsp;</p>
-
-<p class=MsoNormal>            function startAgentChat() {</p>
-
-<p class=MsoNormal>                if (isAgentChat) return;</p>
-
-<p class=MsoNormal>&nbsp;</p>
-
-<p class=MsoNormal>                isAgentChat = true;</p>
-
-<p class=MsoNormal>                addMessage(&quot;I am now transferring you
-to a live agent. Please wait a moment while they connect to this chat.&quot;,
-&quot;bot&quot;);</p>
-
-<p class=MsoNormal>                </p>
-
-<p class=MsoNormal>                // UI changes to reflect agent chat</p>
-
-<p class=MsoNormal>                chatTitle.textContent = &quot;Live
-Agent&quot;;</p>
-
-<p class=MsoNormal>                chatSubtitle.textContent = &quot;A human is
-now assisting you.&quot;;</p>
-
-<p class=MsoNormal>                agentButton.style.display = 'none';</p>
-
-<p class=MsoNormal>                messageInput.disabled = true;</p>
-
-<p class=MsoNormal>                messageInput.placeholder = &quot;A human
-agent will reply shortly...&quot;;</p>
-
-<p class=MsoNormal>                </p>
-
-<p class=MsoNormal>            }</p>
-
-<p class=MsoNormal>&nbsp;</p>
-
-<p class=MsoNormal>            function showDashboard() {</p>
-
-<p class=MsoNormal>                dashboardModal.style.display = 'flex';</p>
-
-<p class=MsoNormal>            }</p>
-
-<p class=MsoNormal>&nbsp;</p>
-
-<p class=MsoNormal>            function hideDashboard() {</p>
-
-<p class=MsoNormal>                dashboardModal.style.display = 'none';</p>
-
-<p class=MsoNormal>            }</p>
-
-<p class=MsoNormal>&nbsp;</p>
-
-<p class=MsoNormal>            function showFaq() {</p>
-
-<p class=MsoNormal>                faqModal.style.display = 'flex';</p>
-
-<p class=MsoNormal>            }</p>
-
-<p class=MsoNormal>&nbsp;</p>
-
-<p class=MsoNormal>            function hideFaq() {</p>
-
-<p class=MsoNormal>                faqModal.style.display = 'none';</p>
-
-<p class=MsoNormal>            }</p>
-
-<p class=MsoNormal>&nbsp;</p>
-
-<p class=MsoNormal>            // Event Listeners</p>
-
-<p class=MsoNormal>            sendButton.addEventListener('click',
-sendMessage);</p>
-
-<p class=MsoNormal>            messageInput.addEventListener('keydown', (e)
-=&gt; {</p>
-
-<p class=MsoNormal>                if (e.key === 'Enter') {</p>
-
-<p class=MsoNormal>                    sendMessage();</p>
-
-<p class=MsoNormal>                }</p>
-
-<p class=MsoNormal>            });</p>
-
-<p class=MsoNormal>            agentButton.addEventListener('click',
-startAgentChat);</p>
-
-<p class=MsoNormal>            dashboardButton.addEventListener('click',
-showDashboard);</p>
-
-<p class=MsoNormal>            closeModalButton.addEventListener('click',
-hideDashboard);</p>
-
-<p class=MsoNormal>            faqButton.addEventListener('click', showFaq);</p>
-
-<p class=MsoNormal>            closeFaqModalButton.addEventListener('click',
-hideFaq);</p>
-
-<p class=MsoNormal>        });</p>
-
-<p class=MsoNormal>    &lt;/script&gt;</p>
-
-<p class=MsoNormal>&lt;/body&gt;</p>
-
-<p class=MsoNormal>&lt;/html&gt;</p>
-
-</div>
-
+<body class="flex items-center justify-center min-h-screen p-4">
+
+    <div class="relative w-full max-w-2xl bg-white shadow-xl rounded-2xl flex flex-col h-[80vh] overflow-hidden">
+        
+        <!-- Header -->
+        <div class="p-4 border-b border-gray-200 bg-white sticky top-0 z-10 rounded-t-2xl">
+            <div class="flex items-center justify-between">
+                <div id="chat-header-info" class="flex items-center space-x-3">
+                    <div class="w-10 h-10 bg-blue-500 rounded-full flex items-center justify-center text-white font-bold">AI</div>
+                    <div>
+                        <h1 id="chat-title" class="text-xl font-semibold">Gemini Customer Support</h1>
+                        <p id="chat-subtitle" class="text-sm text-gray-500">How can I assist you today?</p>
+                    </div>
+                </div>
+                <div class="flex space-x-2">
+                    <button id="faq-button" class="bg-gray-100 text-gray-700 px-4 py-2 rounded-full text-sm font-medium hover:bg-gray-200 transition-colors duration-200">
+                        FAQs
+                    </button>
+                    <button id="dashboard-button" class="bg-gray-100 text-gray-700 px-4 py-2 rounded-full text-sm font-medium hover:bg-gray-200 transition-colors duration-200">
+                        Dashboard
+                    </button>
+                    <button id="agent-button" class="bg-blue-500 text-white px-4 py-2 rounded-full text-sm font-medium hover:bg-blue-600 transition-colors duration-200">
+                        Talk to an Agent
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Chat Container -->
+        <div id="chat-container" class="flex-1 p-6 overflow-y-auto space-y-4">
+            <!-- Initial bot message -->
+            <div class="flex items-start space-x-3">
+                <div class="w-8 h-8 rounded-full bg-blue-100 flex items-center justify-center text-blue-600 flex-shrink-0">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-5 h-5">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M9.813 15.939c-.198-.44-.316-.91-.35-1.4a5.992 5.992 0 011.009-4.22c.38-.636.817-1.22 1.32-1.745-.045.025-.09.05-.135.074C10.603 9.484 9.172 11.235 9 13.064c-.201 2.87 2.115 5.21 4.966 4.943a1.99 1.99 0 001.385-1.579c.07-.464.113-.938.12-1.411.011-.676-.11-1.345-.333-1.986l-.004-.012c-.223-.64-.537-1.218-.887-1.724a.8.8 0 01.442-1.399c1.47-.393 2.822.427 3.33 1.834.457 1.256.457 2.585 0 3.841-1.47 4.026-6.494 4.026-7.964 0zm0 0c.34-.336.711-.643 1.11-.913.045-.03.09-.059.135-.089a.8.8 0 01.442 1.399c-.854.774-1.921 1.2-2.997 1.215-2.87.201-5.21-2.115-4.943-4.966.07-.638.113-1.27.12-1.907.011-1.349-.11-2.678-.333-3.987l-.004-.012c-.223-1.317-.537-2.587-.887-3.722a.8.8 0 01.442-1.399c1.47-.393 2.822.427 3.33 1.834.457 1.256.457 2.585 0 3.841-1.47 4.026-6.494 4.026-7.964 0z" />
+                        </svg>
+                    </div>
+                </div>
+                <div class="bg-gray-100 p-3 rounded-xl max-w-md">
+                    <p class="text-sm">Hi there! I'm your AI customer support assistant. How can I help you today? You can ask about **shipping**, **returns**, or **order status**.</p>
+                </div>
+            </div>
+            
+        </div>
+
+        <!-- Input and Send Button -->
+        <div class="p-4 border-t border-gray-200 bg-white sticky bottom-0 z-10 rounded-b-2xl">
+            <div class="relative">
+                <input id="message-input" type="text" placeholder="Type your message..." class="w-full pl-4 pr-12 py-3 rounded-full bg-gray-100 focus:outline-none focus:ring-2 focus:ring-blue-500 transition-shadow duration-300 placeholder:text-gray-500">
+                <button id="send-button" class="absolute inset-y-0 right-0 flex items-center justify-center pr-3 group">
+                    <div class="p-2 bg-blue-500 rounded-full transition-all duration-200 group-hover:scale-110">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-6 h-6 text-white transform rotate-90">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M6 12L3 21m18-9l-3 9m-9-9h9M3 3l18 18" />
+                        </svg>
+                    </div>
+                </button>
+            </div>
+        </div>
+
+        <!-- Loading Indicator -->
+        <div id="loading-indicator" class="absolute inset-x-0 bottom-40 w-12 h-12 rounded-full mx-auto hidden">
+            <div class="h-full w-full rounded-full bg-blue-500 animate-pulse"></div>
+        </div>
+
+    </div>
+
+    <!-- Dashboard Modal -->
+    <div id="dashboard-modal" class="modal-overlay">
+        <div class="modal-content">
+            <div class="flex justify-between items-center mb-4">
+                <h2 class="text-2xl font-bold">Support Dashboard</h2>
+                <button id="close-modal-button" class="text-gray-500 hover:text-gray-700 transition-colors duration-200">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-6 h-6">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+                    </svg>
+                </button>
+            </div>
+            <div class="space-y-4">
+                <div class="bg-gray-100 p-4 rounded-xl flex justify-between items-center">
+                    <span class="text-sm font-medium text-gray-600">Resolution Rate</span>
+                    <span class="text-2xl font-bold text-blue-600">78%</span>
+                </div>
+                <div class="bg-gray-100 p-4 rounded-xl flex justify-between items-center">
+                    <span class="text-sm font-medium text-gray-600">Escalation Rate</span>
+                    <span class="text-2xl font-bold text-red-600">12%</span>
+                </div>
+                <div class="bg-gray-100 p-4 rounded-xl flex justify-between items-center">
+                    <span class="text-sm font-medium text-gray-600">Average Response Time</span>
+                    <span class="text-2xl font-bold text-green-600">45s</span>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- FAQ Modal -->
+    <div id="faq-modal" class="modal-overlay">
+        <div class="modal-content">
+            <div class="flex justify-between items-center mb-4">
+                <h2 class="text-2xl font-bold">Frequently Asked Questions</h2>
+                <button id="close-faq-modal-button" class="text-gray-500 hover:text-gray-700 transition-colors duration-200">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-6 h-6">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+                    </svg>
+                </button>
+            </div>
+            <div class="space-y-4">
+                <div>
+                    <h3 class="font-bold text-lg mb-1">1. Where is my order?</h3>
+                    <p class="text-sm text-gray-700">All orders can be tracked using the tracking number provided in your shipping confirmation email.</p>
+                </div>
+                <hr>
+                <div>
+                    <h3 class="font-bold text-lg mb-1">2. How do I initiate a return?</h3>
+                    <p class="text-sm text-gray-700">To start a return, please visit our Returns Center on our website. You will need your order number and email address.</p>
+                </div>
+                <hr>
+                <div>
+                    <h3 class="font-bold text-lg mb-1">3. What is your return policy?</h3>
+                    <p class="text-sm text-gray-700">You can return most items within 30 days of delivery. The items must be in new and unused condition with original tags and packaging.</p>
+                </div>
+                <hr>
+                <div>
+                    <h3 class="font-bold text-lg mb-1">4. When will I receive my refund?</h3>
+                    <p class="text-sm text-gray-700">Once your return is received and inspected, we will send you an email notification. Refunds are typically processed within 5-7 business days.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const chatContainer = document.getElementById('chat-container');
+            const messageInput = document.getElementById('message-input');
+            const sendButton = document.getElementById('send-button');
+            const loadingIndicator = document.getElementById('loading-indicator');
+            const agentButton = document.getElementById('agent-button');
+            const chatTitle = document.getElementById('chat-title');
+            const chatSubtitle = document.getElementById('chat-subtitle');
+            const dashboardButton = document.getElementById('dashboard-button');
+            const dashboardModal = document.getElementById('dashboard-modal');
+            const closeModalButton = document.getElementById('close-modal-button');
+            const faqButton = document.getElementById('faq-button');
+            const faqModal = document.getElementById('faq-modal');
+            const closeFaqModalButton = document.getElementById('close-faq-modal-button');
+
+            let isAgentChat = false;
+            
+            // Dummy data for previous orders
+            const dummyOrders = [
+                { id: '12345', product: 'Wireless Mouse', status: 'Delivered', returnEligibility: true, date: '2025-08-20' },
+                { id: '67890', product: 'Ergonomic Keyboard', status: 'Delivered', returnEligibility: false, date: '2025-06-15' },
+                { id: '11223', product: 'Laptop Stand', status: 'Shipped', returnEligibility: true, date: '2025-09-01' }
+            ];
+
+            // Function to add a message to the chat container
+            function addMessage(message, type) {
+                const messageWrapper = document.createElement('div');
+                messageWrapper.className = `flex items-start space-x-3 transition-opacity duration-300 ease-in-out opacity-0 ${type === 'user' ? 'justify-end' : 'justify-start'}`;
+
+                let contentHtml = '';
+                const senderIcon = type === 'user'
+                    ? ''
+                    : `<div class="w-8 h-8 rounded-full bg-blue-100 flex items-center justify-center text-blue-600 flex-shrink-0">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-5 h-5">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M9.813 15.939c-.198-.44-.316-.91-.35-1.4a5.992 5.992 0 011.009-4.22c.38-.636.817-1.22 1.32-1.745-.045.025-.09.05-.135.074C10.603 9.484 9.172 11.235 9 13.064c-.201 2.87 2.115 5.21 4.966 4.943a1.99 1.99 0 001.385-1.579c.07-.464.113-.938.12-1.411.011-.676-.11-1.345-.333-1.986l-.004-.012c-.223-.64-.537-1.218-.887-1.724a.8.8 0 01.442-1.399c1.47-.393 2.822.427 3.33 1.834.457 1.256.457 2.585 0 3.841-1.47 4.026-6.494 4.026-7.964 0zm0 0c.34-.336.711-.643 1.11-.913.045-.03.09-.059.135-.089a.8.8 0 01.442 1.399c-.854.774-1.921 1.2-2.997 1.215-2.87.201-5.21-2.115-4.943-4.966.07-.638.113-1.27.12-1.907.011-1.349-.11-2.678-.333-3.987l-.004-.012c-.223-1.317-.537-2.587-.887-3.722a.8.8 0 01.442-1.399c1.47-.393 2.822.427 3.33 1.834.457 1.256.457 2.585 0 3.841-1.47 4.026-6.494 4.026-7.964 0z" />
+                        </svg>
+                    </div>`;
+
+                if (type === 'user') {
+                    contentHtml = `
+                        <div class="bg-blue-500 text-white p-3 rounded-xl max-w-md shadow-md">
+                            <p class="text-sm">${message}</p>
+                        </div>
+                    `;
+                } else {
+                    // Check if message is a simple string or HTML content
+                    const isHTML = message.trim().startsWith('<div') || message.trim().startsWith('<p') || message.trim().startsWith('<ul');
+                    
+                    if (isHTML) {
+                        contentHtml = `${senderIcon}<div class="bg-gray-100 p-3 rounded-xl max-w-md shadow-md">${message}</div>`;
+                    } else {
+                        contentHtml = `${senderIcon}<div class="bg-gray-100 p-3 rounded-xl max-w-md shadow-md"><p class="text-sm">${message}</p></div>`;
+                    }
+                }
+
+                messageWrapper.innerHTML = contentHtml;
+                chatContainer.appendChild(messageWrapper);
+                
+                // Animate fade-in
+                setTimeout(() => {
+                    messageWrapper.style.opacity = '1';
+                }, 10);
+
+                chatContainer.scrollTop = chatContainer.scrollHeight;
+            }
+
+            // Simulates the backend call to the Vercel serverless function
+            async function getGeminiResponse(message) {
+                // For this prototype, we'll just mock a response.
+                await new Promise(resolve => setTimeout(resolve, 1500)); // Simulate network delay
+                
+                const lowerCaseMessage = message.toLowerCase();
+
+                // Check for previous orders, including typos
+                if (lowerCaseMessage.includes("previous orders") || lowerCaseMessage.includes("my orders") || lowerCaseMessage.includes("my last orders") || lowerCaseMessage.includes("orderts") || lowerCaseMessage.includes("orders") || lowerCaseMessage.includes("orderss")) {
+                    const ordersHTML = dummyOrders.map(order => 
+                        `<div class="bg-white p-4 my-2 rounded-xl shadow">
+                            <p class="font-semibold text-gray-800">Order ID: <span class="text-blue-600">#${order.id}</span></p>
+                            <p class="text-sm text-gray-600">Product: ${order.product}</p>
+                            <p class="text-sm text-gray-600">Status: ${order.status}</p>
+                            <p class="text-sm text-gray-600">Return Eligible: ${order.returnEligibility ? 'Yes' : 'No'}</p>
+                        </div>`
+                    ).join('');
+                    return `<div class="w-full">${ordersHTML}</div>`;
+                }
+                
+                // Check for return-related keywords
+                else if (lowerCaseMessage.includes("return") || lowerCaseMessage.includes("refund")) {
+                    const orderIdMatch = message.match(/(\d{5})/);
+                    if (orderIdMatch) {
+                        const orderId = orderIdMatch[0];
+                        const order = dummyOrders.find(o => o.id === orderId);
+                        if (order) {
+                            if (order.returnEligibility) {
+                                return `I've checked order #${orderId}. It is eligible for return. You can start the process on our website.`;
+                            } else {
+                                return `I'm sorry, order #${orderId} is no longer eligible for a return as it was delivered on ${order.date}.`;
+                            }
+                        } else {
+                            return `I couldn't find an order with the ID #${orderId}. Please check the number and try again.`;
+                        }
+                    } else {
+                        return "You can return most items within 30 days of delivery. Do you have an order number I can check for you?";
+                    }
+                }
+                // Check for order status
+                else if (lowerCaseMessage.includes("order") && lowerCaseMessage.includes("status")) {
+                    return "I've checked your order. It's currently out for delivery and expected to arrive by the end of the day.";
+                } 
+                // Check for FAQ-related keywords
+                else if (lowerCaseMessage.includes("faq") || lowerCaseMessage.includes("question")) {
+                    return "You can find answers to our most frequently asked questions by clicking the **FAQs** button in the top right corner.";
+                }
+                // Handle generic greetings
+                else if (lowerCaseMessage.includes("hello") || lowerCaseMessage.includes("hi")) {
+                    return "Hello! How can I help you today?";
+                } else {
+                    return "I'm sorry, I don't have information about that. Please ask about shipping or returns, or connect with a live agent for further assistance.";
+                }
+            }
+
+            async function sendMessage() {
+                const message = messageInput.value.trim();
+                if (message === '' || isAgentChat) return;
+
+                addMessage(message, 'user');
+                messageInput.value = '';
+                loadingIndicator.classList.remove('hidden');
+
+                const botResponse = await getGeminiResponse(message);
+                
+                loadingIndicator.classList.add('hidden');
+                addMessage(botResponse, 'bot');
+            }
+
+            function startAgentChat() {
+                if (isAgentChat) return;
+
+                isAgentChat = true;
+                addMessage("I am now transferring you to a live agent. Please wait a moment while they connect to this chat.", "bot");
+                
+                // UI changes to reflect agent chat
+                chatTitle.textContent = "Live Agent";
+                chatSubtitle.textContent = "A human is now assisting you.";
+                agentButton.style.display = 'none';
+                messageInput.disabled = true;
+                messageInput.placeholder = "A human agent will reply shortly...";
+                
+            }
+
+            function showDashboard() {
+                dashboardModal.style.display = 'flex';
+            }
+
+            function hideDashboard() {
+                dashboardModal.style.display = 'none';
+            }
+
+            function showFaq() {
+                faqModal.style.display = 'flex';
+            }
+
+            function hideFaq() {
+                faqModal.style.display = 'none';
+            }
+
+            // Event Listeners
+            sendButton.addEventListener('click', sendMessage);
+            messageInput.addEventListener('keydown', (e) => {
+                if (e.key === 'Enter') {
+                    sendMessage();
+                }
+            });
+            agentButton.addEventListener('click', startAgentChat);
+            dashboardButton.addEventListener('click', showDashboard);
+            closeModalButton.addEventListener('click', hideDashboard);
+            faqButton.addEventListener('click', showFaq);
+            closeFaqModalButton.addEventListener('click', hideFaq);
+        });
+    </script>
 </body>
-
 </html>
