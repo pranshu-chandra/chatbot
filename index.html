@@ -69,8 +69,7 @@
                 <div class="w-8 h-8 rounded-full bg-blue-100 flex items-center justify-center text-blue-600 flex-shrink-0">
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-5 h-5">
                         <path stroke-linecap="round" stroke-linejoin="round" d="M9.813 15.939c-.198-.44-.316-.91-.35-1.4a5.992 5.992 0 011.009-4.22c.38-.636.817-1.22 1.32-1.745-.045.025-.09.05-.135.074C10.603 9.484 9.172 11.235 9 13.064c-.201 2.87 2.115 5.21 4.966 4.943a1.99 1.99 0 001.385-1.579c.07-.464.113-.938.12-1.411.011-.676-.11-1.345-.333-1.986l-.004-.012c-.223-.64-.537-1.218-.887-1.724a.8.8 0 01.442-1.399c1.47-.393 2.822.427 3.33 1.834.457 1.256.457 2.585 0 3.841-1.47 4.026-6.494 4.026-7.964 0zm0 0c.34-.336.711-.643 1.11-.913.045-.03.09-.059.135-.089a.8.8 0 01.442 1.399c-.854.774-1.921 1.2-2.997 1.215-2.87.201-5.21-2.115-4.943-4.966.07-.638.113-1.27.12-1.907.011-1.349-.11-2.678-.333-3.987l-.004-.012c-.223-1.317-.537-2.587-.887-3.722a.8.8 0 01.442-1.399c1.47-.393 2.822.427 3.33 1.834.457 1.256.457 2.585 0 3.841-1.47 4.026-6.494 4.026-7.964 0z" />
-                        </svg>
-                    </div>
+                    </svg>
                 </div>
                 <div class="bg-gray-100 p-3 rounded-xl max-w-md">
                     <p class="text-sm">Hi there! I'm your AI customer support assistant. How can I help you today? You can ask about **shipping**, **returns**, or **order status**.</p>
@@ -210,7 +209,6 @@
                         </div>
                     `;
                 } else {
-                    // Check if message is a simple string or HTML content
                     const isHTML = message.trim().startsWith('<div') || message.trim().startsWith('<p') || message.trim().startsWith('<ul');
                     
                     if (isHTML) {
@@ -223,7 +221,6 @@
                 messageWrapper.innerHTML = contentHtml;
                 chatContainer.appendChild(messageWrapper);
                 
-                // Animate fade-in
                 setTimeout(() => {
                     messageWrapper.style.opacity = '1';
                 }, 10);
@@ -231,17 +228,16 @@
                 chatContainer.scrollTop = chatContainer.scrollHeight;
             }
 
-            // Simulates the backend call to the Vercel serverless function
             async function getGeminiResponse(message) {
-                // For this prototype, we'll just mock a response.
-                await new Promise(resolve => setTimeout(resolve, 1500)); // Simulate network delay
+                await new Promise(resolve => setTimeout(resolve, 1500));
                 
                 const lowerCaseMessage = message.toLowerCase();
 
-                // Check for previous orders, including typos
-                if (lowerCaseMessage.includes("previous orders") || lowerCaseMessage.includes("my orders") || lowerCaseMessage.includes("my last orders") || lowerCaseMessage.includes("orderts") || lowerCaseMessage.includes("orders") || lowerCaseMessage.includes("orderss")) {
+                // Advanced keyword and typo handling for orders and shipping
+                const orderKeywords = ["previous orders", "my orders", "last orders", "orderts", "orders", "orderss", "show me orders", "shipment", "shipping"];
+                if (orderKeywords.some(keyword => lowerCaseMessage.includes(keyword))) {
                     const ordersHTML = dummyOrders.map(order => 
-                        `<div class="bg-white p-4 my-2 rounded-xl shadow">
+                        `<div class="bg-white p-4 my-2 rounded-xl shadow-md">
                             <p class="font-semibold text-gray-800">Order ID: <span class="text-blue-600">#${order.id}</span></p>
                             <p class="text-sm text-gray-600">Product: ${order.product}</p>
                             <p class="text-sm text-gray-600">Status: ${order.status}</p>
@@ -251,15 +247,16 @@
                     return `<div class="w-full">${ordersHTML}</div>`;
                 }
                 
-                // Check for return-related keywords
-                else if (lowerCaseMessage.includes("return") || lowerCaseMessage.includes("refund")) {
+                // Advanced keyword and typo handling for returns and refunds
+                const returnKeywords = ["return", "refund", "returns", "refunds", "return an item"];
+                if (returnKeywords.some(keyword => lowerCaseMessage.includes(keyword))) {
                     const orderIdMatch = message.match(/(\d{5})/);
                     if (orderIdMatch) {
                         const orderId = orderIdMatch[0];
                         const order = dummyOrders.find(o => o.id === orderId);
                         if (order) {
                             if (order.returnEligibility) {
-                                return `I've checked order #${orderId}. It is eligible for return. You can start the process on our website.`;
+                                return `I've checked order #${orderId}. It is eligible for return. To initiate a return, please visit our online Returns Center.`;
                             } else {
                                 return `I'm sorry, order #${orderId} is no longer eligible for a return as it was delivered on ${order.date}.`;
                             }
@@ -267,19 +264,29 @@
                             return `I couldn't find an order with the ID #${orderId}. Please check the number and try again.`;
                         }
                     } else {
-                        return "You can return most items within 30 days of delivery. Do you have an order number I can check for you?";
+                        return "You can return most items within 30 days of delivery. For more details on our return policy and to start the process, please visit our help center. Do you have an order number I can check for you?";
                     }
                 }
-                // Check for order status
-                else if (lowerCaseMessage.includes("order") && lowerCaseMessage.includes("status")) {
-                    return "I've checked your order. It's currently out for delivery and expected to arrive by the end of the day.";
-                } 
-                // Check for FAQ-related keywords
-                else if (lowerCaseMessage.includes("faq") || lowerCaseMessage.includes("question")) {
-                    return "You can find answers to our most frequently asked questions by clicking the **FAQs** button in the top right corner.";
+                
+                // General FAQ-style questions
+                if (lowerCaseMessage.includes("contact") || lowerCaseMessage.includes("customer service") || lowerCaseMessage.includes("call you")) {
+                    return "You can reach our customer support team by phone at 1-800-555-1234 or by emailing support@ecommerce.com.";
                 }
-                // Handle generic greetings
-                else if (lowerCaseMessage.includes("hello") || lowerCaseMessage.includes("hi")) {
+
+                if (lowerCaseMessage.includes("hours") || lowerCaseMessage.includes("open") || lowerCaseMessage.includes("close")) {
+                    return "Our customer support team is available Monday to Friday, from 9 AM to 5 PM (EST).";
+                }
+
+                if (lowerCaseMessage.includes("shipping policy") || lowerCaseMessage.includes("shipping costs")) {
+                    return "Our standard shipping is free for all orders over $50. We also offer expedited shipping options at an additional cost. You can find more details on our Shipping Policy page.";
+                }
+
+                if (lowerCaseMessage.includes("payment methods") || lowerCaseMessage.includes("pay")) {
+                    return "We accept all major credit cards, as well as PayPal and Apple Pay. For a full list, please see our FAQ page.";
+                }
+                
+                // Generic greetings and fallback
+                if (lowerCaseMessage.includes("hello") || lowerCaseMessage.includes("hi") || lowerCaseMessage.includes("hey")) {
                     return "Hello! How can I help you today?";
                 } else {
                     return "I'm sorry, I don't have information about that. Please ask about shipping or returns, or connect with a live agent for further assistance.";
@@ -306,7 +313,6 @@
                 isAgentChat = true;
                 addMessage("I am now transferring you to a live agent. Please wait a moment while they connect to this chat.", "bot");
                 
-                // UI changes to reflect agent chat
                 chatTitle.textContent = "Live Agent";
                 chatSubtitle.textContent = "A human is now assisting you.";
                 agentButton.style.display = 'none';
@@ -331,7 +337,6 @@
                 faqModal.style.display = 'none';
             }
 
-            // Event Listeners
             sendButton.addEventListener('click', sendMessage);
             messageInput.addEventListener('keydown', (e) => {
                 if (e.key === 'Enter') {
