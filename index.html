@@ -108,7 +108,7 @@
          * - For production, proxy via your backend (recommended): POST /api/gemini {message, context}
          * - This file supports both: set USE_DIRECT_GEMINI=true and provide GEMINI_API_KEY, or leave false to use smart local NLU fallback.
          */
-        const USE_DIRECT_GEMINI = false; // set to true only if you will call Google's API directly from the browser (dev only)
+        const USE_DIRECT_GEMINI = true; // set to true only if you will call Google's API directly from the browser (dev only)
         const GEMINI_API_KEY = "";      // dev-only; do NOT ship secrets to the client in production
         const GEMINI_MODEL = "gemini-1.5-flash"; // change to 1.5-pro for higher quality if your quota allows
 
@@ -377,5 +377,6 @@
     </script>
 </body>
 </html>
+
 
 
